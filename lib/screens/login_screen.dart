@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'dart:convert' as convert;
 
 import 'package:bookstore_app/components/snack_bar.dart';
+import 'package:bookstore_app/screens/books_screen.dart';
 import 'package:bookstore_app/services/login_service.dart' as login_service;
 import 'package:bookstore_app/utils/exception.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   Future<void> _handleSignIn(BuildContext context) async {
     final username = _usernameController.text;
     final password = _passwordController.text;
@@ -25,11 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('basic', basic);
     var msg;
-    Scaffold.of(context).showSnackBar(LoadingSnakeBar());
     try {
       msg = await login_service.login();
     } on HttpStatusException catch (e) {
-      Scaffold.of(context).removeCurrentSnackBar();
       prefs.remove('basic');
       if (e.status == HttpStatus.unauthorized)
         Scaffold.of(context).showSnackBar(
@@ -41,15 +47,19 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       return;
     } catch (_) {
-      Scaffold.of(context).removeCurrentSnackBar();
       prefs.remove('basic');
       Scaffold.of(context).showSnackBar(
         HintSnakeBar(hint: 'Unknown error'),
       );
       return;
     }
-    Scaffold.of(context).removeCurrentSnackBar();
     prefs.setString('authorities', convert.json.encode(msg.data));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => BooksScreen(),
+      ),
+    );
   }
 
   @override
@@ -82,7 +92,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 20,),
                       TextField(
-                        obscureText: false,
                         controller: _usernameController,
                         decoration: InputDecoration(
                           hintText: 'Username',
