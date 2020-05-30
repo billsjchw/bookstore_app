@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Book {
+  final int id;
   final String isbn;
   final String title;
   final String author;
@@ -13,6 +14,7 @@ class Book {
   final Introduction introduction;
 
   Book({
+    @required this.id,
     @required this.isbn,
     @required this.title,
     @required this.author,
@@ -27,6 +29,7 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
+      id: json['id'],
       isbn: json['isbn'],
       title: json['title'],
       author: json['author'],
@@ -42,6 +45,7 @@ class Book {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
+      'id': id,
       'isbn': isbn,
       'title': title,
       'author': author,
@@ -56,62 +60,68 @@ class Book {
   }
 
   @override
-  bool operator ==(other) => other is Book && other.isbn == isbn;
+  bool operator ==(other) => other is Book && other.id == id;
 
   @override
-  int get hashCode => isbn.hashCode;
+  int get hashCode => id.hashCode;
 }
 
 class Cover {
-  final String isbn;
+  final int bookId;
   final String data;
 
-  Cover({this.isbn, this.data});
+  Cover({
+    @required this.bookId,
+    @required this.data,
+  });
 
   factory Cover.fromJson(Map<String, dynamic> json) {
     return Cover(
-      isbn: json['isbn'],
+      bookId: json['bookId'],
       data: json['data'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'isbn': isbn,
+      'bookId': bookId,
       'data': data,
     };
   }
 
   @override
-  bool operator ==(other) => other is Cover && other.isbn == isbn;
+  bool operator ==(other) => other is Cover && other.bookId == bookId;
 
   @override
-  int get hashCode => isbn.hashCode;
+  int get hashCode => bookId.hashCode;
 }
 
 class Introduction {
-  final String isbn;
+  final int bookId;
   final String data;
 
-  Introduction({this.isbn, this.data});
+  Introduction({
+    @required this.bookId,
+    @required this.data,
+  });
 
   factory Introduction.fromJson(Map<String, dynamic> json) {
     return Introduction(
-      isbn: json['isbn'],
+      bookId: json['bookId'],
       data: json['data'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'isbn': isbn,
+      'bookId': bookId,
       'data': data,
     };
   }
 
   @override
-  bool operator ==(other) => other is Introduction && other.isbn == isbn;
+  bool operator ==(other) => other is Introduction && other.bookId == bookId;
 
   @override
-  int get hashCode => isbn.hashCode;
+  int get hashCode => bookId.hashCode;
 }
