@@ -6,7 +6,7 @@ class Authority {
 
   Authority({
     @required this.id,
-    @required this.name,
+    @required this.name
   });
 
   factory Authority.fromJson(Map<String, dynamic> json) {
@@ -16,14 +16,12 @@ class Authority {
     );
   }
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
-    'id': id,
-    'name': name,
-  };
+  @override
+  bool operator ==(other) {
+    return other is Authority && other.id == id;
+  }
 
   @override
-  bool operator ==(dynamic other) => other is Authority && other.id == id;
-
-  @override
+  // TODO: implement hashCode
   int get hashCode => id.hashCode;
 }
