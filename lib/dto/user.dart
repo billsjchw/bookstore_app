@@ -60,6 +60,8 @@ class Profile {
       email: json['email'],
     );
   }
+
+  get name => '$firstName $lastName';
 }
 
 class Avatar {

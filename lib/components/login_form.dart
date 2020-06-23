@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bookstore_app/dto/user.dart';
+import 'package:bookstore_app/screens/home_screen.dart';
 import 'package:bookstore_app/services/login_service.dart' as login_service;
 import 'package:bookstore_app/utils/global.dart' as global;
 import 'package:flutter/material.dart';
@@ -32,12 +33,10 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future<void> _handleSubmit(BuildContext context) async {
-    if (_submitting)
-      return;
+    if (_submitting) return;
 
-    if (!_formKey.currentState.validate())
-      return;
-    
+    if (!_formKey.currentState.validate()) return;
+
     _submitting = true;
 
     final username = _usernameController.text;
@@ -48,7 +47,10 @@ class _LoginFormState extends State<LoginForm> {
 
     if (msg.status == 'SUCCESS') {
       global.user = User.fromJson(msg.data);
-      print('SUCCESS');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
     } else if (msg.status == 'UNAUTHORIZED') {
       global.basic = null;
       final reason = msg.data as String;
