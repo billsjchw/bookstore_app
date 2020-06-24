@@ -9,7 +9,7 @@ class User {
   final bool enabled;
   final Set<Role> roles;
   final Avatar avatar;
-  
+
   User({
     @required this.id,
     @required this.username,
@@ -19,7 +19,7 @@ class User {
     @required this.roles,
     @required this.avatar,
   });
-  
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
@@ -38,7 +38,6 @@ class User {
   }
 
   @override
-  // TODO: implement hashCode
   int get hashCode => id.hashCode;
 }
 
@@ -79,4 +78,12 @@ class Avatar {
       data: json['data'],
     );
   }
+
+  @override
+  bool operator ==(other) {
+    return other is Avatar && other.userId == userId;
+  }
+
+  @override
+  int get hashCode => userId.hashCode;
 }

@@ -13,7 +13,13 @@ class BookScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Book')),
       bottomNavigationBar: AddToCartBar(book: book),
-      body: BookView(book: book),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 5,
+        ),
+        child: BookView(book: book),
+      ),
     );
   }
 }

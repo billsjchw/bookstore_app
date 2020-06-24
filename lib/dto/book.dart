@@ -43,6 +43,22 @@ class Book {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'isbn': isbn,
+      'title': title,
+      'author': author,
+      'lang': lang,
+      'press': press,
+      'date': date.toIso8601String(),
+      'price': price,
+      'stock': stock,
+      'cover': cover.toJson(),
+      'intro': intro.toJson(),
+    };
+  }
+
   @override
   bool operator ==(other) => other is Book && other.id == id;
 
@@ -65,6 +81,21 @@ class Cover {
       data: json['data'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'bookId': bookId,
+      'data': data,
+    };
+  }
+
+  @override
+  bool operator ==(other) {
+    return other is Cover && other.bookId == bookId;
+  }
+
+  @override
+  int get hashCode => bookId.hashCode;
 }
 
 class Introduction {
@@ -82,4 +113,19 @@ class Introduction {
       data: json['data'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'bookId': bookId,
+      'data': data,
+    };
+  }
+
+  @override
+  bool operator ==(other) {
+    return other is Introduction && other.bookId == bookId;
+  }
+
+  @override
+  int get hashCode => bookId.hashCode;
 }

@@ -1,3 +1,4 @@
+import 'package:bookstore_app/screens/cart_screen.dart';
 import 'package:bookstore_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bookstore_app/utils/global.dart' as global;
@@ -45,6 +46,12 @@ class BookstoreDrawer extends Drawer {
         ListTile(
           leading: Icon(Icons.shopping_cart),
           title: Text('Cart'),
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => CartScreen()),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.assignment),

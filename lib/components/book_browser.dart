@@ -26,7 +26,17 @@ class _BookBrowserState extends State<BookBrowser> {
   @override
   void initState() {
     super.initState();
-    _handleReset();
+    _initFetch();
+  }
+
+  Future<void> _initFetch() async {
+    _loading = true;
+    final msg = await book_service.findAllBooks(0, widget.pageSize);
+    setState(() {
+      if (msg.status == 'SUCCESS')
+        _bookPages.add(BookPage.fromJson(msg.data));
+    });
+    _loading = false;
   }
 
   Future<void> _handleLoadMore() async {

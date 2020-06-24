@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:bookstore_app/dto/cart.dart';
+
 Uint8List dataUriToBytes(String dataUri) {
   return base64.decode(dataUri.split(',').last);
 }
@@ -20,4 +22,13 @@ String stockDescription(int stock) {
     return '⚠ Low stock';
   else
     return '✔ Sufficient stock';
+}
+
+int cartTotalPrice(Cart cart) {
+  return cart.items.fold(
+    0,
+    (previousValue, element) =>
+        previousValue +
+        (element.active ? element.book.price * element.amount : 0),
+  );
 }

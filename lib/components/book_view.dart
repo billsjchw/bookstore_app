@@ -22,13 +22,8 @@ class BookView extends StatelessWidget {
           width: 380,
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 15,
-                  bottom: 10,
-                ),
-                child: Image.memory(coverBytes),
-              ),
+              Image.memory(coverBytes),
+              SizedBox(height: 10),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Column(
