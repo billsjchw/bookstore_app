@@ -33,9 +33,11 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future<void> _handleSubmit(BuildContext context) async {
-    if (_submitting) return;
+    if (_submitting)
+      return;
 
-    if (!_formKey.currentState.validate()) return;
+    if (!_formKey.currentState.validate())
+      return;
 
     _submitting = true;
 

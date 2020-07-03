@@ -1,5 +1,6 @@
 import 'package:bookstore_app/components/cart_item_card.dart';
 import 'package:bookstore_app/dto/cart.dart';
+import 'package:bookstore_app/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bookstore_app/services/cart_service.dart' as cart_service;
 import 'package:bookstore_app/utils/util.dart' as util;
@@ -138,6 +139,15 @@ class _CartManagerState extends State<CartManager> {
                   ),
                 ),
                 SizedBox(height: 5),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                    );
+                  },
+                  child: Text('GO TO CHECKOUT'),
+                ),
               ],
             ),
           );
