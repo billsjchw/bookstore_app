@@ -1,19 +1,11 @@
+import 'package:bookstore_app/screens/cart_screen.dart';
+import 'package:bookstore_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class BookstoreDrawer extends Drawer {
-  final void Function() onTapBooks;
-  final void Function() onTapCart;
-  final void Function() onTapOrders;
-  final void Function() onTapUser;
-  
-  BookstoreDrawer({
-    @required this.onTapBooks,
-    @required this.onTapCart,
-    @required this.onTapOrders,
-    @required this.onTapUser,
-  }) : super(
+  BookstoreDrawer(BuildContext context)
+      : super(
     child: ListView(
-      padding: EdgeInsets.zero,
       children: <Widget>[
         DrawerHeader(
           decoration: BoxDecoration(
@@ -24,7 +16,7 @@ class BookstoreDrawer extends Drawer {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Image(
-                image: AssetImage('images/books.png'),
+                image: AssetImage('assets/images/logo.png'),
                 height: 80,
                 width: 80,
               ),
@@ -40,25 +32,33 @@ class BookstoreDrawer extends Drawer {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.book),
-          title: Text('Books'),
-          onTap: onTapBooks,
+          leading: Icon(Icons.home),
+          title: Text('Home'),
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.shopping_cart),
           title: Text('Cart'),
-          onTap: onTapCart,
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => CartScreen()),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.assignment),
           title: Text('Orders'),
-          onTap: onTapOrders,
         ),
         ListTile(
           leading: Icon(Icons.account_box),
-          title: Text('User'),
-          onTap: onTapUser,
-        )
+          title: Text('Account'),
+        ),
       ],
     ),
   );

@@ -1,6 +1,5 @@
-import 'package:bookstore_app/screens/books_screen.dart';
+import 'package:bookstore_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import './screens/login_screen.dart';
 
 void main() {
   runApp(Bookstore());
