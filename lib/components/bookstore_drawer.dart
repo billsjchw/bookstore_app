@@ -1,8 +1,6 @@
 import 'package:bookstore_app/screens/cart_screen.dart';
 import 'package:bookstore_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:bookstore_app/utils/global.dart' as global;
-import 'package:bookstore_app/utils/util.dart' as util;
 
 class BookstoreDrawer extends Drawer {
   BookstoreDrawer(BuildContext context)

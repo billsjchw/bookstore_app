@@ -38,7 +38,6 @@ class _CartManagerState extends State<CartManager> {
 
     _submitting = true;
     final msg = await cart_service.editItemInMyCart(cartItem);
-    print(msg.status);
     if (msg.status == 'SUCCESS')
       setState(() {
         cart.items.remove(cartItem);
@@ -71,7 +70,6 @@ class _CartManagerState extends State<CartManager> {
 
     _submitting = true;
     final msg = await cart_service.deleteItemFromMyCart(cartItem.book.id);
-    print(msg.status);
     if (msg.status == 'SUCCESS')
       setState(() {
         cart.items.remove(cartItem);
@@ -112,6 +110,12 @@ class _CartManagerState extends State<CartManager> {
     }).toList();
   }
 
+  void _handleBackFromCheckout(value) {
+    this.setState(() {
+      this._future = this._fetchCart();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -144,7 +148,7 @@ class _CartManagerState extends State<CartManager> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => CheckoutScreen()),
-                    );
+                    ).then(this._handleBackFromCheckout);
                   },
                   child: Text('GO TO CHECKOUT'),
                 ),
